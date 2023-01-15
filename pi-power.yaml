@@ -1,0 +1,100 @@
+# Substitutions
+substitutions:
+
+  # Board
+  platform: ESP8266
+  board: d1_mini
+  powerledgpio: GPIO2
+  rebootgpio: GPIO0
+
+  # Identity
+  domain: switch
+  domainshort: sw
+  endpoint: pi_power
+  devicename: ${domain}-${endpoint}
+
+  # Features
+  wifi_fast_connect: 'on'
+
+  # WiFi - Same for all devices
+  wifigateway: !secret wifigateway
+  subnet: !secret subnet
+  wifissid: !secret wifi_ssid
+  wifipwd: !secret wifi_pwd
+  appwd: !secret esphome_appassword
+  fast_connect: $wifi_fast_connect
+
+# Enable Web server
+web_server:
+  port: 80
+
+# Enable Home Assistant API
+api:
+
+# Basic configuration
+esphome:
+  name: $devicename
+  platform: $platform
+  board: $board
+  on_boot:
+    - light.turn_on: powerled
+
+# Network configuration
+wifi:
+  networks:
+    - ssid: $wifissid
+      password: $wifipwd
+    - ssid: $wifissidbackup
+      password: $wifipwdbackup
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap: #Settings for captive portal
+    ssid: esphome_${domainshort}_${endpoint}
+    password: $appwd
+captive_portal: # AP in case WiFi connection fails
+
+# Enable logging
+logger:
+
+# Enable OTA firmware update
+ota:
+
+# Safe Mode
+switch:
+  - platform: safe_mode
+    name: ${devicename}_safe_mode
+
+output:
+# Pi power switch
+  - platform: gpio
+    id: output_1
+    pin: $rebootgpio
+# Power LED light output
+  - platform: esp8266_pwm
+    id: powerledoutput
+    pin: $powerledgpio
+    inverted: True
+
+button:
+  # Power momentary button
+  - platform: output
+    name: ${endpoint}_power_switch
+    output: output_1
+    duration: 500ms
+    id: output1_button
+
+# Sync time with Home Assistant
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+# IP address sensor
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: ${devicename} IP
+
+light:
+  # Power LED light
+  - platform: binary
+    output: powerledoutput
+    id: powerled
