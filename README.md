@@ -2,19 +2,19 @@
 Need to add instructions for ESPHome and 
 
 # pi_off_esphome_ha
-Remote WiFi power switch for Raspberry Pi using ESPHome for Home Assistant Button
+Remote WiFi power switch for Raspberry Pi using ESPHome with ot without Home Assistant
 
-Inspired by https://github.com/lukehod/Pi-Off. Substantial amounts of the README take from there, too. Thanks, @lukehod.
+Inspired by https://github.com/lukehod/Pi-Off. Substantial amounts of the README and the wiring diagram are taken from there, too. Thanks, @lukehod.
 
 This method works with either USB or PoE power to the Pi. I have only tested it with the [official PoE+ hat]: https://thepihut.com/products/raspberry-pi-poe-plus-hat
 
 Wifi Power Button for Raspberry Pi
-Use an ESP8266-based arduino microcontroller (D1 mini by default) to remotely power on and off your Raspberry Pi from any device connected to your wireless network.
+Use an ESP8266 board with ESPHome (D1 mini by default) to remotely power on and off your Raspberry Pi from any device connected to your wireless network.
 
 This is an ESPHome configuration file for the ESP8226 that:
-1. Create a button on webpage at a local IP to switch the power on the Pi. Note that the swtich only initates power on or power off. It doesn't actually know whether or not the Pi is on or off.
-2. Creates a button in Home Assistant to switch on or off. Note that Home Assistant only initates power on or power off. It doesn't actually know whether or not the Pi is on or off.
-3. Enables the ESP's built-in led as a power indictation
+1. Creates a button on webpage at a local IP to switch the power on the Pi. Note that the swtich only initates power on or power off. It doesn't actually know whether or not the Pi is on or off.
+2. If you are using ESPHome together with Home Assistant, also creates a button in Home Assistant to switch the Pi on or off. Note that Home Assistant only initates power on or power off. It doesn't actually know whether or not the Pi is on or off.
+3. Enables the ESP's built-in led as a power indictation.
 
 ## How to get running:
 
@@ -36,9 +36,9 @@ This is an ESPHome configuration file for the ESP8226 that:
 4. `crl+x`, `Y`, `enter` to save and exit the editor
 5. `sudo reboot` to restart the system
 
-### ESPHome instructions
+### ESPHome
+See here for general instructions on using ESPHome [ESPHome docs]: https://esphome.io. There are also great resources for ESPHome and helpful people on the [Home Assistant Community forum]: https://community.home-assistant.io/.
 
-To be added
 
 
 ### Wire it all together
