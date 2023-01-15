@@ -38,7 +38,7 @@ After everything is up and running, go to the IP for the D1 mini (or the `.local
 
 Remember that ESPHome does not know the power state of the Pi. You will have to determine that yourself.
 
-[Example ESPHome webpage](/img/webpage.png)
+![Example ESPHome webpage](/img/webpage.png)
 
 To reboot the Pi from the webpage:
 1. Press the button.
