@@ -1,6 +1,3 @@
-# W-I-P
-Need to add instructions for ESPHome and 
-
 # pi_off_esphome_ha
 Remote WiFi power switch for Raspberry Pi using ESPHome with ot without Home Assistant
 
